@@ -39,6 +39,15 @@ def compose_html(dataset: covid_weekly.Dataset) -> str:
 
     html += """
     <head>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-WXQZGB6422"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-WXQZGB6422');
+        </script>
         <meta charset="utf-8">
         <title>Weekly confirmed COVID-19 cases per capita and week-over-week percent increase</title>
         <link rel="stylesheet" href="style.css">
