@@ -48,9 +48,10 @@ def compose_html(dataset: covid_weekly.Dataset) -> str:
 
           gtag('config', 'G-WXQZGB6422');
         </script>
-        <meta charset="utf-8">
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <title>Weekly confirmed COVID-19 cases per capita and week-over-week percent increase</title>
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="style.css"/>
         <link rel="icon" type="image/png" href="favicon.png"/>
     </head>
     """
