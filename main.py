@@ -86,8 +86,9 @@ def compose_html(dataset: covid_weekly.Dataset) -> str:
     territory_keys = sorted(
         [country for countries in regions.values() for country in countries]
     )
-    html += "<h3>Countries</h3>\n"
-    html += "<div id='index'>\n"
+    html += "<h3 id='index'>Countries</h3>\n"
+    html += "<div id='scroll'><a href='#index'>Back to index</a></div>\n"
+    html += "<div id='country-list'>\n"
     for territory_key in territory_keys:
         iso3 = dataset.territories[territory_key]['iso3']
         html += f"<a href='#{iso3}'>{territory_key}</a><br />\n"
@@ -102,6 +103,21 @@ def compose_html(dataset: covid_weekly.Dataset) -> str:
             html += f"<a name='{iso3}'><img src=./{img_file} /></a><br />\n"
 
     html += "<footer>Made by Michal with matplotlib and pandas.</footer>\n"
+    html += """
+        <script>
+        var scrollButton = document.getElementById("scroll");
+            window.onscroll = function() {scrollFunction()};
+
+        function scrollFunction() {
+          var indexOffset = document.getElementById("index").getBoundingClientRect().top;
+          if (indexOffset < 0) {
+            scrollButton.style.display = "block";
+          } else {
+            scrollButton.style.display = "none";
+          }
+        }
+        </script>
+    """
     html += "</body></html>"
     return html
 
