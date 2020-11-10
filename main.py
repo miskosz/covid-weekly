@@ -106,7 +106,8 @@ def compose_html(dataset: covid_weekly.Dataset) -> str:
     html += """
         <script>
         var scrollButton = document.getElementById("scroll");
-            window.onscroll = function() {scrollFunction()};
+        window.onscroll = function() {scrollFunction()};
+        scrollFunction()
 
         function scrollFunction() {
           var indexOffset = document.getElementById("index").getBoundingClientRect().top;

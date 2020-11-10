@@ -9,5 +9,4 @@ mkdir build
 mkdir build/plots
 sh download_data.sh
 python main.py
-cp style.css build/
-cp favicon.png build/
+cp static/* build/
