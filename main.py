@@ -3,6 +3,7 @@ from typing import List
 
 import matplotlib.pyplot as plt
 import pandas as pd
+import pytz
 
 import covid_weekly
 
@@ -75,7 +76,7 @@ def compose_html(dataset: covid_weekly.Dataset) -> str:
 
     <h4>Notes</h4>
     <ul>
-        <li>Weeks span Monday&ndash;Sunday and are labelled by Mondays.
+        <li>Weeks span Monday&ndash;Sunday and are labelled by Sundays.
         <li>Week-over-week increase is plotted only for weeks with at least one case per
         <span class="nowrap">100&thinsp;000</span> inhabitants.
         <li>Geographical regions are according to <a href="https://www.cia.gov/library/publications/the-world-factbook/fields/276.html">
@@ -102,7 +103,12 @@ def compose_html(dataset: covid_weekly.Dataset) -> str:
 
             html += f"<a name='{iso3}'><img src=./{img_file} /></a><br />\n"
 
-    html += "<footer>Made by Michal with matplotlib and pandas.</footer>\n"
+    html += f"""
+    <footer>
+    Made by Michal with matplotlib and pandas.<br />
+    Last updated {pd.Timestamp.now(tz=pytz.utc).strftime('%m/%d/%Y %H:%M %Z')}.
+    </footer>
+    """
     html += """
         <script>
         var scrollButton = document.getElementById("scroll");

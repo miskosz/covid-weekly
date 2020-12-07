@@ -33,11 +33,11 @@ def _territory_confirmed_per100k(dataset: Dataset, territory_key: str) -> pd.Ser
 def _weekly_series(total: pd.Series) -> pd.Series:
     """
     weekly = total[this Sunday] - total[last Sunday]
-    label = last Monday
+    label = this Sunday
     """
     total_np = total.to_numpy()
     weekly = total_np[7::7]-total_np[:-7:7]  # Sundays
-    index = total.index[1:-6:7]  # Mondays
+    index = total.index[7::7]  # Sundays
     return pd.Series(weekly, index)
 
 
