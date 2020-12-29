@@ -60,7 +60,8 @@ def compose_html(dataset: covid_weekly.Dataset) -> str:
     html += "<body>"
 
     html += f"""
-    <h1>Weekly confirmed COVID-19 cases per capita and week-over-week percent increase</h1>
+    <h1>Weekly confirmed COVID-19 cases per capita</h1>
+    <!--h1>Weekly confirmed COVID-19 cases per capita and week-over-week percent increase</h1-->
 
     <p>
     The graphs below show weekly progress of the coronavirus pandemic for European
@@ -77,8 +78,8 @@ def compose_html(dataset: covid_weekly.Dataset) -> str:
     <h4>Notes</h4>
     <ul>
         <li>Weeks span Monday&ndash;Sunday and are labelled by Sundays.
-        <li>Week-over-week increase is plotted only for weeks with at least one case per
-        <span class="nowrap">100&thinsp;000</span> inhabitants.
+        <!-- <li>Week-over-week increase is plotted only for weeks with at least one case per
+        <span class="nowrap">100&thinsp;000</span> inhabitants. -->
         <li>Geographical regions are according to <a href="https://www.cia.gov/library/publications/the-world-factbook/fields/276.html">
         CIA World Factbook.</a>
     </ul>

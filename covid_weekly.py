@@ -81,19 +81,21 @@ def territory_plot(dataset: Dataset, territory_key: str) -> matplotlib.figure.Fi
     plt.rcParams["font.serif"] = ["charter", "Georgia", "Cambria", "Times New Roman", "Times", "serif"]
     plt.rcParams["font.size"] = 11
 
-    figure = plt.figure(figsize=(10, 8))
-    spec = matplotlib.gridspec.GridSpec(nrows=2, ncols=1, height_ratios=[2, 1])
+    # figure = plt.figure(figsize=(10, 8))
+    # spec = matplotlib.gridspec.GridSpec(nrows=2, ncols=1, height_ratios=[2, 1])
 
-    ax0 = figure.add_subplot(spec[0])
+    # ax0 = figure.add_subplot(spec[0])
+    figure = plt.figure(figsize=(10, 5))
+    ax0 = figure.add_subplot(111)
     _bar_plot(ax=ax0, series=weekly, color="steelblue")
     ax0.set_ylim([0, 800])
     ax0.set_title(f"New cases weekly per 100k inhabitants (current: {weekly[-1]:.0f})", pad=12)
 
-    ax1 = figure.add_subplot(spec[1])
-    _bar_plot(ax=ax1, series=rate, color="steelblue")  # tab:blue slategrey
-    ax1.set_ylim([-1.0, 2.0])
-    ax1.yaxis.set_major_formatter(ticker.FuncFormatter(_rate_fmt))
-    ax1.set_title(f"Week-over-week percent increase (current: {_rate_fmt(rate[-1])})", pad=12)
+    # ax1 = figure.add_subplot(spec[1])
+    # _bar_plot(ax=ax1, series=rate, color="steelblue")  # tab:blue slategrey
+    # ax1.set_ylim([-1.0, 2.0])
+    # ax1.yaxis.set_major_formatter(ticker.FuncFormatter(_rate_fmt))
+    # ax1.set_title(f"Week-over-week percent increase (current: {_rate_fmt(rate[-1])})", pad=12)
 
     figure.suptitle(territory_key, fontsize=20, y=0.95)
     figure.tight_layout(pad=1.8)
