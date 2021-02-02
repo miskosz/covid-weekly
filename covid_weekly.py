@@ -26,7 +26,8 @@ def _territory_confirmed_per100k(dataset: Dataset, territory_key: str) -> pd.Ser
         (dataset.confirmed["Province/State"] == territory["Province_State"])
     )
     row = dataset.confirmed[selector_confirmed]
-    total = row.loc[:,"1/26/20":].squeeze()  # Jan 26 is first Sunday in the data.
+    # Start displaying data from the week following Sunday Feb 23.
+    total = row.loc[:,"2/23/20":].squeeze()
     return total / population * 100000
 
 
@@ -88,7 +89,8 @@ def territory_plot(dataset: Dataset, territory_key: str) -> matplotlib.figure.Fi
     figure = plt.figure(figsize=(10, 5))
     ax0 = figure.add_subplot(111)
     _bar_plot(ax=ax0, series=weekly, color="steelblue")
-    ax0.set_ylim([0, 800])
+    ax0.set_ylim([0, 1000])
+    ax0.set_yticks(np.arange(100, 1001, 100))
     ax0.set_title(f"New cases weekly per 100k inhabitants (current: {weekly[-1]:.0f})", pad=12)
 
     # ax1 = figure.add_subplot(spec[1])
@@ -97,7 +99,7 @@ def territory_plot(dataset: Dataset, territory_key: str) -> matplotlib.figure.Fi
     # ax1.yaxis.set_major_formatter(ticker.FuncFormatter(_rate_fmt))
     # ax1.set_title(f"Week-over-week percent increase (current: {_rate_fmt(rate[-1])})", pad=12)
 
-    figure.suptitle(territory_key, fontsize=20, y=0.95)
+    figure.suptitle(territory_key, fontsize=20, y=0.93)
     figure.tight_layout(pad=1.8)
     figure.patch.set_facecolor('white')
     return figure
