@@ -69,6 +69,9 @@ def _bar_plot(ax: matplotlib.axis.Axis, series: pd.Series, color: str) -> None:
 
     # x axis
     xticks = [_date_fmt(x) for x in series.index]
+    # Leave out every second one from the end for legibility
+    for i in range(len(series)-2, -1, -2):
+        xticks[i] = ""
     ax.set_xticklabels(xticks)
     ax.xaxis.set_ticks_position('none')
 
