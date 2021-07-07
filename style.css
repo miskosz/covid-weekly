@@ -1,0 +1,77 @@
+html {
+  max-width: 70ch;
+  padding: 0.5ch;
+  margin: auto;
+  font-size: 1.2em;
+  font-family: "charter", "Georgia", "Cambria", "Times New Roman", "Times", "serif";
+}
+
+img {
+  width: 100%;
+  margin-top: 1em;
+  margin-bottom: 2em;
+}
+
+h2 {
+  border-bottom: 1px solid grey;
+}
+
+ul {
+  margin: -0.5em 0 2.5em 0;
+}
+
+#scroll {
+  position: fixed;
+  bottom: 15px;
+  right: 20px;
+  font-size: 12pt;
+  background-color: white;
+  padding: 5px 8px;
+}
+
+#country-list {
+  column-count: 5;
+  font-size: 12pt;
+  margin-bottom: 3em;
+}
+
+@media only screen and (max-width: 550px) {
+  #country-list {
+    column-count: 4;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  #country-list {
+    column-count: 3;
+  }
+}
+
+#country-list a {
+  display: inline-block;
+}
+
+a[href] {
+  color: #095ca7;
+  text-decoration: none;
+  margin: 0.2em 0 0.2em 0;
+}
+
+a[href]:hover {
+  color: red;
+  border-bottom: 1px dotted red;
+  margin-bottom: calc(0.2em - 1px);
+}
+
+footer {
+  color: #555;
+  border-top: 1px solid grey;
+  margin-top: 2em;
+  padding: 1.5em 0 1.5em 0;
+  text-align: center;
+  font-size: medium;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
