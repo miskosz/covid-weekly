@@ -92,8 +92,10 @@ def territory_plot(dataset: Dataset, territory_key: str) -> matplotlib.figure.Fi
     figure = plt.figure(figsize=(10, 5))
     ax0 = figure.add_subplot(111)
     _bar_plot(ax=ax0, series=weekly, color="steelblue")
-    ax0.set_ylim([0, 1000])
-    ax0.set_yticks(np.arange(100, 1001, 100))
+    ymax = 3000
+    ytickstep = 250
+    ax0.set_ylim([0, ymax])
+    ax0.set_yticks(np.arange(ytickstep, ymax + 1, ytickstep))
     ax0.set_title(f"New cases weekly per 100k inhabitants (current: {weekly[-1]:.0f})", pad=12)
 
     # ax1 = figure.add_subplot(spec[1])
