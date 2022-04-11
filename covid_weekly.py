@@ -42,44 +42,54 @@ def _weekly_series(total: pd.Series) -> pd.Series:
     return pd.Series(weekly, index)
 
 
-def _rate_series(weekly: pd.Series) -> pd.Series:
-    weekly_np = weekly.to_numpy()
-    increase = [np.nan]
-    for last, cur in zip(weekly_np[:-1], weekly_np[1:]):
-        increase.append(
-            cur / last - 1.0 if last >= 1.0 and cur >= 1.0 else np.nan
-        )
-    return pd.Series(increase, weekly.index)
+def _date_to_days(date: pd.Timestamp):
+    date0 = pd.Timestamp("2020-03-01")
+    return (date - date0).days
 
 
 def _date_fmt(date_str: str):
-    return pd.to_datetime(date_str).strftime('%b %d')
+    dt = pd.to_datetime(date_str)
+    if dt.month == 1:
+        return dt.strftime("%b \'%y")
+    return dt.strftime("%b")
 
 
-def _rate_fmt(rate: float, pos=0):
-    return f"{'+' if rate >= 0 else '–'}{100*abs(rate):.0f}%"
+def _set_yticks(ax: matplotlib.axis.Axis, ymax: int, ytickstep: int):
+    ax.set_ylim([0, ymax])
+    ax.set_yticks(np.arange(ytickstep, ymax + 1, ytickstep))
+    ax.yaxis.grid(True)
+    ax.yaxis.set_ticks_position('none')
+
+
+def _set_xticks(ax: matplotlib.axis.Axis, series: pd.Series):
+    month_starts = pd.date_range(series.index[0], series.index[-1], freq='MS')
+    month_mids = month_starts + pd.DateOffset(days=14)
+
+    # Month labels
+    xticks = [_date_to_days(d) for d in month_mids]
+    xticklabels = [_date_fmt(d) for d in month_mids]
+    ax.set_xticks(xticks)
+    ax.set_xticklabels(xticklabels, rotation=90)
+    ax.xaxis.set_ticks_position('none')
+
+    # Year gridlines
+    minor_ticks = [_date_to_days(pd.Timestamp(d)) for d in ["2021-01-01", "2022-01-01"]]
+    ax.set_xticks(minor_ticks, minor=True)
+    ax.xaxis.grid(True, which="minor")
+
+    # Limits
+    ax.set_xlim([0, max(xticks)])
 
 
 def _bar_plot(ax: matplotlib.axis.Axis, series: pd.Series, color: str) -> None:
-    series.plot.bar(ax=ax, width=0.9, color=color)
-
-    # y axis
-    ax.yaxis.grid(True)
-    ax.yaxis.set_ticks_position('none') 
-
-    # x axis
-    xticks = [_date_fmt(x) for x in series.index]
-    # Leave out every second one from the end for legibility
-    for i in range(len(series)-2, -1, -2):
-        xticks[i] = ""
-    ax.set_xticklabels(xticks)
-    ax.xaxis.set_ticks_position('none')
+    x = [_date_to_days(pd.Timestamp(d)) for d in series.index]
+    y = list(series)
+    ax.bar(x, y, width=6)
 
 
 def territory_plot(dataset: Dataset, territory_key: str) -> matplotlib.figure.Figure:
     total = _territory_confirmed_per100k(dataset=dataset, territory_key=territory_key)
     weekly = _weekly_series(total=total)
-    rate = _rate_series(weekly=weekly)
 
     plt.rcParams["font.family"] = "serif"
     plt.rcParams["font.serif"] = ["charter", "Georgia", "Cambria", "Times New Roman", "Times", "serif"]
@@ -91,11 +101,9 @@ def territory_plot(dataset: Dataset, territory_key: str) -> matplotlib.figure.Fi
     # ax0 = figure.add_subplot(spec[0])
     figure = plt.figure(figsize=(10, 5))
     ax0 = figure.add_subplot(111)
-    _bar_plot(ax=ax0, series=weekly, color="steelblue")
-    ymax = 3000
-    ytickstep = 250
-    ax0.set_ylim([0, ymax])
-    ax0.set_yticks(np.arange(ytickstep, ymax + 1, ytickstep))
+    _bar_plot(ax0, weekly, "steelblue")
+    _set_yticks(ax0, ymax=3000, ytickstep=250)
+    _set_xticks(ax0, weekly)
     ax0.set_title(f"New cases weekly per 100k inhabitants (current: {weekly[-1]:.0f})", pad=12)
 
     # ax1 = figure.add_subplot(spec[1])
