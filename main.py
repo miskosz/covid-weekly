@@ -16,6 +16,7 @@ Merged SW+S and excluded countries with population < 100k:
     Andorra 77265
 """
 regions = OrderedDict([
+    # ("Northern Europe", ["Denmark", "Finland"]),
     ("Northern Europe", ["Denmark", "Finland", "Iceland", "Norway", "Sweden"]),
     ("Western Europe", ["Belgium", "France", "Ireland", "Luxembourg", "Netherlands", "United Kingdom"]),
     ("Central Europe", ["Austria", "Czechia", "Germany", "Hungary", "Poland", "Slovakia", "Slovenia", "Switzerland"]),
