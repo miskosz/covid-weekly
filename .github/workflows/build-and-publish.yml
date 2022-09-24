@@ -8,13 +8,12 @@ jobs:
       - uses: actions/setup-python@v4
         with:
           python-version: '3.10'
-          cache: 'pip'
       - name: Install dependencies
         run: pip install -r requirements.txt
       - name: Install fonts
         run: |
-          sudo apt install msttcorefonts -qq
-          rm ~/.cache/matplotlib -rf
+          ACCEPT_EULA=Y sudo apt install msttcorefonts -qq
+          rm -rf ~/.cache/matplotlib
       - name: Build
         run: ./build.sh
       - name: Deploy
