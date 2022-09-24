@@ -10,7 +10,7 @@ jobs:
           python-version: '3.10'
           cache: 'pip'
       - name: Install dependencies
-        run: pip install numpy matplotlib pandas pytz
+        run: pip install -r requirements.txt
       - name: Build
         run: ./build.sh
       - name: List files in the repository
