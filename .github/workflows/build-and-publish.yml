@@ -13,8 +13,5 @@ jobs:
         run: pip install -r requirements.txt
       - name: Build
         run: ./build.sh
-      - name: List files in the repository
-        run: |
-          ls ${{ github.workspace }}
-          ls ${{ github.workspace }}/build
-      - run: echo "🍏 This job's status is ${{ job.status }}."
+      - name: Publish
+        run: ./publish.sh
