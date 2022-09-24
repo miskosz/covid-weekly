@@ -12,7 +12,8 @@ jobs:
         run: pip install -r requirements.txt
       - name: Install fonts
         run: |
-          ACCEPT_EULA=Y sudo apt install msttcorefonts -qq
+          echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections
+          sudo apt install msttcorefonts -qq
           rm -rf ~/.cache/matplotlib
       - name: Build
         run: ./build.sh
