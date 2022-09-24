@@ -16,13 +16,13 @@ Merged SW+S and excluded countries with population < 100k:
     Andorra 77265
 """
 regions = OrderedDict([
-    ("Northern Europe", ["Denmark", "Finland"]),
-    # ("Northern Europe", ["Denmark", "Finland", "Iceland", "Norway", "Sweden"]),
-    # ("Western Europe", ["Belgium", "France", "Ireland", "Luxembourg", "Netherlands", "United Kingdom"]),
-    # ("Central Europe", ["Austria", "Czechia", "Germany", "Hungary", "Poland", "Slovakia", "Slovenia", "Switzerland"]),
-    # ("Eastern Europe", ["Belarus", "Estonia", "Latvia", "Lithuania", "Moldova", "Ukraine"]),
-    # ("Southern and Southwestern Europe", ["Greece", "Italy", "Malta", "Portugal", "Spain"]),
-    # ("Southeastern Europe", ["Albania", "Bosnia and Herzegovina", "Bulgaria", "Croatia", "Montenegro", "North Macedonia", "Romania", "Serbia"]),
+    # ("Northern Europe", ["Denmark", "Finland"]),
+    ("Northern Europe", ["Denmark", "Finland", "Iceland", "Norway", "Sweden"]),
+    ("Western Europe", ["Belgium", "France", "Ireland", "Luxembourg", "Netherlands", "United Kingdom"]),
+    ("Central Europe", ["Austria", "Czechia", "Germany", "Hungary", "Poland", "Slovakia", "Slovenia", "Switzerland"]),
+    ("Eastern Europe", ["Belarus", "Estonia", "Latvia", "Lithuania", "Moldova", "Ukraine"]),
+    ("Southern and Southwestern Europe", ["Greece", "Italy", "Malta", "Portugal", "Spain"]),
+    ("Southeastern Europe", ["Albania", "Bosnia and Herzegovina", "Bulgaria", "Croatia", "Montenegro", "North Macedonia", "Romania", "Serbia"]),
 ])
 
 def compose_html(dataset: covid_weekly.Dataset) -> str:

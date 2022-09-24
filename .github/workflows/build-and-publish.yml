@@ -1,5 +1,8 @@
 name: Build and publish
-on: [push]
+on:
+  push:
+  schedule:
+  - cron: '17 4 * * *'  # 4:17am UTC everyday
 jobs:
   build-and-publish:
     runs-on: ubuntu-latest
