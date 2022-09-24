@@ -84,7 +84,7 @@ def _set_xticks(ax: matplotlib.axis.Axis, series: pd.Series):
 def _bar_plot(ax: matplotlib.axis.Axis, series: pd.Series, color: str) -> None:
     x = [_date_to_days(pd.Timestamp(d)) for d in series.index]
     y = list(series)
-    ax.bar(x, y, width=6, color=color)
+    ax.bar(x, y, width=7, color=color)
 
 
 def territory_plot(dataset: Dataset, territory_key: str) -> matplotlib.figure.Figure:
