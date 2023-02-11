@@ -63,7 +63,13 @@ def _set_yticks(ax: matplotlib.axis.Axis, ymax: float, ytickstep: float):
 
 
 def _set_xticks(ax: matplotlib.axis.Axis, series: pd.Series):
-    month_starts = pd.date_range(series.index[0], series.index[-1], freq='MS')
+    # Create month labels in the middle of the month.
+    # First create month starts, then move them by 14 days.
+    month_starts = pd.date_range(
+        pd.to_datetime(series.index[0]),
+        pd.to_datetime(series.index[-1]) - pd.DateOffset(days=14),
+        freq='MS'
+    )
     month_mids = month_starts + pd.DateOffset(days=14)
 
     # Month labels
@@ -74,7 +80,10 @@ def _set_xticks(ax: matplotlib.axis.Axis, series: pd.Series):
     ax.xaxis.set_ticks_position('none')
 
     # Year gridlines
-    minor_ticks = [_date_to_days(pd.Timestamp(d)) for d in ["2021-01-01", "2022-01-01"]]
+    minor_ticks = [
+        _date_to_days(pd.Timestamp(d))
+        for d in ["2021-01-01", "2022-01-01", "2023-01-01"]
+    ]
     ax.set_xticks(minor_ticks, minor=True)
     ax.xaxis.grid(True, which="minor")
 
